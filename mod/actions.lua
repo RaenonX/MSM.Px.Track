@@ -1,3 +1,5 @@
+coordinates = require(scriptPath() .. "mod/coordinates")
+configs = require(scriptPath() .. "mod/configs")
 functions = require(scriptPath() .. "mod/functions")
 
 local base = {}
@@ -26,6 +28,21 @@ function base.upload_px(item, px)
             px = tostring(px)
         }
     )
+end
+
+function base.click_search_bar_focus()
+    functions.random_click(coordinates.location_search_bar_focus)
+    functions.random_wait(configs.click_wait_sec)
+end
+
+function base.click_search_bar_clear()
+    functions.random_click(coordinates.location_search_bar_clear)
+    functions.random_wait(configs.click_wait_sec)
+end
+
+function base.click_search_execute() 
+    functions.random_click(coordinates.location_search_bar_search)
+    functions.random_wait(configs.click_wait_sec)
 end
 
 return base
