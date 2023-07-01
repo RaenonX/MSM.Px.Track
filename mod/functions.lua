@@ -36,7 +36,7 @@ end
 function base.api_post(api_path, params)
     params.token = configs.api_token
 
-    return httpPost("https://msm.raenonx.cc" .. api_path, params)
+    return httpPost("https://msm-api.raenonx.cc" .. api_path, params)
 end
 
 return base
