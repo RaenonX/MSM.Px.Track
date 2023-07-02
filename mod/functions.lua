@@ -39,4 +39,8 @@ function base.api_post(api_path, params)
     return httpPost("https://msm-api.raenonx.cc" .. api_path, params)
 end
 
+function base.api_get(api_path)
+    return httpGet("https://msm-api.raenonx.cc" .. api_path)
+end
+
 return base

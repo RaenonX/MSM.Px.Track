@@ -30,6 +30,20 @@ function base.upload_px(item, px)
     )
 end
 
+function base.get_tracking_items()
+    local tracking_items_str = functions.api_get("/api/item/tracking")
+
+    tracking_items = { }
+    index = 1
+
+    for item in string.gmatch(tracking_items_str, "[^,]+") do 
+        tracking_items[index] = item
+        index = index + 1
+    end
+
+    return tracking_items
+end
+
 function base.click_search_bar_focus()
     functions.random_click(coordinates.location_search_bar_focus)
     functions.random_wait(configs.click_wait_sec)

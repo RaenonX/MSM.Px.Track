@@ -46,7 +46,9 @@ end
 local current_check_target = nil
 
 while true do
-    for _, item_name in ipairs(configs.items_to_check) do
+    tracking_items = actions.get_tracking_items()
+
+    for _, item_name in ipairs(tracking_items) do
         current_check_target = item_name
         repeat
             current_check_target = main_px_check(current_check_target)
