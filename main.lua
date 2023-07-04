@@ -5,6 +5,9 @@ configs = require(scriptPath() .. "mod/configs")
 functions = require(scriptPath() .. "mod/functions")
 
 Settings:set("MinSimilarity", 0.8)
+-- Created on 2960 x 1440 (Note 8)
+Settings:setScriptDimension(true, 2960)
+Settings:setCompareDimension(true, 2960)
 
 local function main_px_check(item_name)
     local api_response = nil
