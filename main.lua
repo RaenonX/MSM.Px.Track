@@ -9,27 +9,14 @@ Settings:set("MinSimilarity", 0.8)
 local function main_px_check(item_name)
     local api_response = nil
 
-    -- Click on search bar (in search page)
-    actions.click_search_bar_focus()
-
-    -- > Note that `type()` touches clipboard, 
-    -- > so it's best that this script doesn't run on emulator
-    -- Type item name
-    type(item_name)
-    functions.random_wait(configs.type_wait_sec)
-
-    -- Click on search
-    -- > Need to click twice, because the 1st clicks off text input
-    -- > 2nd executes the search
-    actions.click_search_execute()
-    actions.click_search_execute()
+    -- Navigate to item page from search page
+    actions.navigate_to_item_from_search(item_name)
 
     -- Check the price
     local px = actions.px_ocr(coordinates.region_1st_item_lowest)
 
     -- Send it to API
     if px ~= nil then
-        toast(item_name .. ": " .. px)
         -- Returns "" for backend returning `Ok()`
         api_response = actions.upload_px(item_name, px)
     end
