@@ -30,6 +30,7 @@ local function main_px_check(item_name)
     return api_response
 end
 
+local loop_timer = Timer()
 local current_check_target = nil
 
 -- Take a screenshot before the script starts
@@ -37,7 +38,8 @@ local current_check_target = nil
 actions.take_screenshot("startup")
 
 while true do
-    tracking_items = actions.get_tracking_items()
+    item_count, tracking_items = actions.get_tracking_items()
+    loop_timer:set()
 
     for _, item_name in ipairs(tracking_items) do
         current_check_target = item_name
@@ -45,4 +47,6 @@ while true do
             current_check_target = main_px_check(current_check_target)
         until current_check_target == nil or current_check_target == ""
     end
+
+    actions.upload_loop_sec(item_count, loop_timer:check())
 end

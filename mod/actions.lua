@@ -30,18 +30,29 @@ function base.upload_px(item, px)
     )
 end
 
+function base.upload_loop_sec(item_count, loop_sec)
+    return functions.api_post(
+        "/api/script/loop", 
+        { 
+            count = tostring(item_count),
+            elapsed = tostring(loop_sec)
+        }
+    )
+end
+
 function base.get_tracking_items()
     local tracking_items_str = functions.api_get("/api/item/tracking")
 
-    tracking_items = { }
-    index = 1
+    local tracking_items = { }
+    -- Can't start with 0, or the 1st item will be skipped
+    local count = 1
 
     for item in string.gmatch(tracking_items_str, "[^,]+") do 
-        tracking_items[index] = item
-        index = index + 1
+        tracking_items[count] = item
+        count = count + 1
     end
 
-    return tracking_items
+    return count - 1, tracking_items
 end
 
 function base.get_sniping_item()
@@ -94,8 +105,8 @@ end
 function base.take_screenshot(folder_name)
 	setImagePath(scriptPath() .. "image/" .. folder_name)
 
-    screen = getRealScreenSize()
-    screen_region = Region(0, 0, screen:getX(), screen:getY())
+    local screen = getRealScreenSize()
+    local screen_region = Region(0, 0, screen:getX(), screen:getY())
     
     screen_region:saveColor(functions.get_current_timestamp_str() .. ".png")
     
