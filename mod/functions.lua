@@ -8,11 +8,11 @@ math.random()
 math.random()
 math.random()
 
-function generate_random(num, offset)
+local function generate_random(num, offset)
     return math.random(num - offset, num + offset)
 end
 
-function table_merge(t1, t2)
+local function table_merge(t1, t2)
     for _, v in ipairs(t2) do
         table.insert(t1, v)
     end
@@ -41,6 +41,18 @@ end
 
 function base.api_get(api_path)
     return httpGet("https://msm-api.raenonx.cc" .. api_path)
+end
+
+function base.get_current_timestamp_str()
+    time = os.date("*t")
+    return ("%04d%02d%02d-%02d%02d%02d"):format(
+        time.year,
+        time.month,
+        time.day,
+        time.hour, 
+        time.min, 
+        time.sec
+    )
 end
 
 return base

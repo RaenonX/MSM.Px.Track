@@ -32,6 +32,10 @@ end
 
 local current_check_target = nil
 
+-- Take a screenshot before the script starts
+-- For recovery from AnkuLua being killed
+actions.take_screenshot("startup")
+
 while true do
     tracking_items = actions.get_tracking_items()
 

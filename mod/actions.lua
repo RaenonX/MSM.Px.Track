@@ -91,4 +91,15 @@ function base.navigate_to_item_from_search(item_name)
     base.click_search_execute()
 end
 
+function base.take_screenshot(folder_name)
+	setImagePath(scriptPath() .. "image/" .. folder_name)
+
+    screen = getRealScreenSize()
+    screen_region = Region(0, 0, screen:getX(), screen:getY())
+    
+    screen_region:saveColor(functions.get_current_timestamp_str() .. ".png")
+    
+	setImagePath(scriptPath() .. "image")
+end
+
 return base
