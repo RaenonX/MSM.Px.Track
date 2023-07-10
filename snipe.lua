@@ -1,11 +1,9 @@
 -- https://ankulua.boards.net/thread/181/api-quick-reference
 actions = require(scriptPath() .. "mod/actions")
 coordinates = require(scriptPath() .. "mod/coordinates")
+configs = require(scriptPath() .. "mod/configs")
 
-Settings:set("MinSimilarity", 0.8)
--- Created on 2960 x 1440 (Note 8)
-Settings:setScriptDimension(true, 2960)
-Settings:setCompareDimension(true, 2960)
+configs.initialize()
 
 local function snipe_px_check(item_name)
     actions.snipe_px_refresh()
