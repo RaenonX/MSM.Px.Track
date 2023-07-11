@@ -36,6 +36,7 @@ local current_check_target = nil
 -- Take a screenshot before the script starts
 -- For recovery from AnkuLua being killed
 actions.take_screenshot("startup")
+actions.calibrate_init_screen()
 
 while true do
     item_count, tracking_items = actions.get_tracking_items()

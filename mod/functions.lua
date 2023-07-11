@@ -33,6 +33,36 @@ function base.random_click(location)
     ))
 end
 
+function base.find_image(image_obj, on_found) 
+    image_obj.region:highlight()
+
+    local found = false
+    for _, location in ipairs(regionFindAllNoFindException(image_obj.region, image_obj.path)) do
+        found = true
+
+        if on_found ~= nil then
+            on_found(location)
+        end
+    end
+    
+    image_obj.region:highlight()
+
+    return found
+end
+
+function base.find_till_found_then_click(image_obj, click_location)
+    local found = false
+
+    while not found do
+        found = base.find_image(
+            image_obj, 
+            function() 
+                base.random_click(click_location) 
+            end
+        )
+    end
+end
+
 function base.api_post(api_path, params)
     params.token = configs.api_token
 

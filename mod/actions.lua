@@ -1,6 +1,7 @@
 coordinates = require(scriptPath() .. "mod/coordinates")
 configs = require(scriptPath() .. "mod/configs")
 functions = require(scriptPath() .. "mod/functions")
+images = require(scriptPath() .. "mod/images")
 
 local base = {}
 
@@ -111,6 +112,23 @@ function base.take_screenshot(folder_name)
     screen_region:saveColor(functions.get_current_timestamp_str() .. ".png")
     
 	setImagePath(scriptPath() .. "image")
+end
+
+function base.calibrate_init_screen()
+    if functions.find_image(images.game_exit_confirm) then
+        functions.random_click(coordinates.game_confirm_exit_no)
+        functions.random_wait(configs.click_wait_sec)
+    end
+
+    if not functions.find_image(images.ts_quick_menu) then
+        -- Not starting from main playing screen
+        return
+    end
+
+    functions.random_click(coordinates.ts_quick_menu_btn)
+    functions.random_wait(configs.click_wait_sec)
+
+    functions.find_till_found_then_click(images.ts_buy_filter_btn, coordinates.ts_search_on_navbar)
 end
 
 return base
